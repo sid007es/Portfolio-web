@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sidharth E. — Web Developer & Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #080808;
+  --surface: #111111;
+  --surface2: #181818;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --white: #f0ede8;
+  --muted: rgba(240,237,232,0.45);
+  --muted2: rgba(240,237,232,0.25);
+  --accent: #e8ff47;
+  --accent2: #47d4ff;
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 6%;
+  border-bottom: 1px solid var(--border);
+  background: rgba(8,8,8,0.9);
+  backdrop-filter: blur(16px);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-hire {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 0.5rem 1.2rem;
+  transition: opacity 0.2s;
+}
+.nav-hire:hover { opacity: 0.85; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0 6% 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 0%, transparent 100%);
+}
+
+.hero-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,255,71,0.06) 0%, transparent 70%);
+  top: 10%; left: -10%;
+  pointer-events: none;
+}
+.hero-glow2 {
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(71,212,255,0.05) 0%, transparent 70%);
+  top: 30%; right: 5%;
+  pointer-events: none;
+}
+
+.hero-available {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  border: 1px solid var(--border2);
+  padding: 0.4rem 0.9rem;
+  margin-bottom: 2rem;
+  position: relative; z-index: 1;
+  width: fit-content;
+}
+.available-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #4ade80;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 8vw, 110px);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+  position: relative; z-index: 1;
+}
+.hero-title .line2 { color: var(--muted2); }
+.hero-title .accent { color: var(--accent); }
+
+.hero-bottom {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 2rem; flex-wrap: wrap;
+  position: relative; z-index: 1;
+}
+.hero-desc {
+  max-width: 420px;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.75;
+}
+.hero-desc strong { color: var(--white); font-weight: 500; }
+
+.hero-pills { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1.5rem; }
+.pill {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--border2);
+  color: var(--muted);
+}
+
+.hero-cta-group { display: flex; flex-direction: column; align-items: flex-end; gap: 1rem; }
+.hero-stat-row { display: flex; gap: 2rem; }
+.hero-stat { text-align: right; }
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent);
+}
+.hero-stat-label { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.06em; margin-top: 2px; }
+.btn-primary {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.9rem 2rem;
+  border: none; cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* SECTIONS */
+section { padding: 6rem 6%; }
+.s-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.8rem;
+}
+.s-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+.s-sub {
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: var(--muted);
+  max-width: 440px;
+  line-height: 1.7;
+}
+
+/* SERVICES */
+.services { background: var(--surface); }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1px;
+  margin-top: 3.5rem;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.service-card {
+  background: var(--surface);
+  padding: 2.2rem 2rem;
+  transition: background 0.2s;
+  cursor: default;
+}
+.service-card:hover { background: var(--surface2); }
+.service-num {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  margin-bottom: 1.5rem;
+}
+.service-name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.8rem;
+}
+.service-desc {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+.service-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tag {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--border2);
+  color: var(--muted);
+}
+
+/* PROJECTS */
+.projects-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem;
+}
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.project-card {
+  background: var(--bg);
+  padding: 2rem;
+  transition: background 0.2s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.project-card:hover { background: var(--surface); }
+.project-card:hover .project-arrow { opacity: 1; transform: translate(0,0); }
+.project-type {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+.project-type.web { color: var(--accent); }
+.project-type.data { color: var(--accent2); }
+.project-name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.6rem;
+  line-height: 1.2;
+}
+.project-desc {
+  font-size: 0.83rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 1.4rem;
+}
+.project-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+.project-stack { font-size: 0.7rem; color: var(--muted2); letter-spacing: 0.05em; }
+.project-arrow {
+  font-size: 1.1rem;
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: all 0.2s;
+  color: var(--accent);
+}
+
+/* ABOUT */
+.about { background: var(--surface); }
+.about-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+  margin-top: 3.5rem;
+}
+.about-text p {
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+}
+.about-text p strong { color: var(--white); font-weight: 500; }
+.about-link {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  text-decoration: none;
+  margin-top: 0.5rem;
+  border-bottom: 1px solid rgba(232,255,71,0.3);
+  padding-bottom: 2px;
+  transition: border-color 0.2s;
+}
+.about-link:hover { border-color: var(--accent); }
+
+.about-skills { display: flex; flex-direction: column; gap: 0; }
+.skill-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.skill-row:first-child { border-top: 1px solid var(--border); }
+.skill-name { font-size: 0.85rem; font-weight: 400; }
+.skill-bar-wrap { width: 120px; height: 2px; background: var(--border2); }
+.skill-bar { height: 100%; background: var(--accent); }
+.skill-bar.blue { background: var(--accent2); }
+
+/* PROCESS */
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 3.5rem;
+}
+.process-step {
+  background: var(--bg);
+  padding: 2rem 1.8rem;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+.process-step:last-child { border-right: none; }
+.process-step-num {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--border2);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.process-step-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+}
+.process-step-desc {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* CTA BAND */
+.cta-band {
+  background: var(--accent);
+  padding: 5rem 6%;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 2rem;
+}
+.cta-band-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 800;
+  color: var(--bg);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.cta-band-sub { font-size: 0.9rem; color: rgba(8,8,8,0.55); margin-top: 0.6rem; font-weight: 300; }
+.btn-dark {
+  background: var(--bg);
+  color: var(--accent);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1rem 2.2rem;
+  border: none; cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.btn-dark:hover { opacity: 0.85; }
+
+/* FOOTER */
+footer {
+  padding: 2rem 6%;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-logo { font-family: var(--font-display); font-size: 1rem; font-weight: 700; }
+.footer-logo span { color: var(--accent); }
+footer p { font-size: 0.75rem; color: var(--muted2); }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-available { animation: fadeUp 0.5s ease both; }
+.hero-title { animation: fadeUp 0.5s 0.08s ease both; }
+.hero-bottom { animation: fadeUp 0.5s 0.18s ease both; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .hero-cta-group { align-items: flex-start; }
+  .hero-stat-row { justify-content: flex-start; }
+  .cta-band { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Sidharth<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://upwork.com" class="nav-hire">Hire on Upwork ↗</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <div class="hero-available">
+    <span class="available-dot"></span>
+    Available for freelance work
+  </div>
+
+  <h1 class="hero-title">
+    WEBSITES.<br>
+    <span class="line2">DATA.</span><br>
+    <span class="accent">RESULTS.</span>
+  </h1>
+
+  <div class="hero-bottom">
+    <div>
+      <p class="hero-desc">
+        I'm <strong>Sidharth E.</strong> — a freelance web developer and data analyst from Kottayam, India.
+        I build <strong>fast, modern websites</strong> using AI-powered tools and turn raw data into
+        <strong>clear, actionable insights</strong> using Python and React.
+      </p>
+      <div class="hero-pills">
+        <span class="pill">React</span>
+        <span class="pill">HTML / CSS</span>
+        <span class="pill">Python</span>
+        <span class="pill">Scikit-learn</span>
+        <span class="pill">AI Tools</span>
+        <span class="pill">Data Analysis</span>
+      </div>
+    </div>
+    <div class="hero-cta-group">
+      <div class="hero-stat-row">
+        <div class="hero-stat">
+          <div class="hero-stat-num">3–5</div>
+          <div class="hero-stat-label">Day delivery</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">M.Tech</div>
+          <div class="hero-stat-label">CS & Data Science</div>
+        </div>
+      </div>
+      <a href="#projects" class="btn-primary">View My Work ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services">
+  <div class="s-label">What I do</div>
+  <h2 class="s-title">TWO SKILLS.<br>ONE FREELANCER.</h2>
+  <p class="s-sub">I combine web development and data science so you don't have to hire two people.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-name">AI Website Building</div>
+      <div class="service-desc">Fast, professional websites and landing pages built using modern AI tools and React. Delivered in 3–5 days — not weeks. Mobile-ready, SEO-friendly, and built to convert.</div>
+      <div class="service-tags">
+        <span class="tag">React</span>
+        <span class="tag">HTML/CSS</span>
+        <span class="tag">Landing Pages</span>
+        <span class="tag">AI Tools</span>
+        <span class="tag">Responsive</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-name">Data Analysis</div>
+      <div class="service-desc">Turn messy data into clear insights. I clean, analyse, and visualise your data using Python and Pandas — then present it in dashboards your whole team can understand.</div>
+      <div class="service-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">Matplotlib</span>
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">Dashboards</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-name">AI Automation</div>
+      <div class="service-desc">Automate repetitive tasks and connect your tools using Python scripts and AI workflows. Save hours every week with custom automation built around your specific process.</div>
+      <div class="service-tags">
+        <span class="tag">Python Scripts</span>
+        <span class="tag">Web Scraping</span>
+        <span class="tag">Automation</span>
+        <span class="tag">APIs</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-name">ML & Predictions</div>
+      <div class="service-desc">Build machine learning models that predict outcomes, classify data, or detect patterns. From data prep through to a working model — delivered with clear documentation.</div>
+      <div class="service-tags">
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">Classification</span>
+        <span class="tag">Regression</span>
+        <span class="tag">Model Evaluation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="projects-header">
+    <div>
+      <div class="s-label">Portfolio</div>
+      <h2 class="s-title">SELECTED WORK</h2>
+    </div>
+    <p class="s-sub" style="margin:0;">A mix of web and data projects — real problems, real solutions.</p>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-type web">Web Development</div>
+      <div class="project-name">Ironform Fitness Studio</div>
+      <div class="project-desc">Full landing page for a premium fitness studio. Includes pricing, testimonials, program cards, and mobile-responsive layout. Built and deployed in under a day.</div>
+      <div class="project-meta">
+        <span class="project-stack">HTML · CSS · AI Tools</span>
+        <span class="project-arrow">↗</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-type data">Data Analysis</div>
+      <div class="project-name">AQI Analysis — Smart City Insights</div>
+      <div class="project-desc">Analysed Air Quality Index data across multiple cities using Python. Identified pollution trends, peak hours, and seasonal patterns. Visualised with Matplotlib and Seaborn.</div>
+      <div class="project-meta">
+        <span class="project-stack">Python · Pandas · Matplotlib</span>
+        <span class="project-arrow">↗</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-type data">Machine Learning</div>
+      <div class="project-name">Medical Image Classifier</div>
+      <div class="project-desc">Built a classification model for medical imaging data using Scikit-learn. Achieved high accuracy through feature engineering, cross-validation, and model tuning.</div>
+      <div class="project-meta">
+        <span class="project-stack">Python · Scikit-learn · NumPy</span>
+        <span class="project-arrow">↗</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-type web">Web Development</div>
+      <div class="project-name">Estone Builders — Business Site</div>
+      <div class="project-desc">Website for a construction company in Kottayam. Clean, professional design with service listings, project showcase, and contact section.</div>
+      <div class="project-meta">
+        <span class="project-stack">React · CSS · AI Tools</span>
+        <span class="project-arrow">↗</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-type data">Python / IoT</div>
+      <div class="project-name">IoT Safety Alert System</div>
+      <div class="project-desc">Real-time safety monitoring system using IoT sensor data. Python pipeline processes sensor readings and triggers alerts when thresholds are exceeded.</div>
+      <div class="project-meta">
+        <span class="project-stack">Python · IoT · Data Pipeline</span>
+        <span class="project-arrow">↗</span>
+      </div>
+    </div>
+    <div class="project-card" style="background: var(--surface); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:0.6rem; min-height:200px;">
+      <div style="font-family:'Syne',sans-serif; font-size:2rem; font-weight:800; color:var(--border2);">+</div>
+      <div style="font-size:0.8rem; color:var(--muted2); text-align:center; max-width:160px; line-height:1.5;">More projects coming soon</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="s-label">Who I am</div>
+  <h2 class="s-title">BUILT DIFFERENT.</h2>
+  <div class="about-inner">
+    <div class="about-text">
+      <p>I'm a freelancer who sits at the intersection of <strong>web development and data science</strong> — which means I can solve problems most developers can't, and build interfaces most data analysts won't.</p>
+      <p>I hold an <strong>Integrated M.Tech in Computer Science & Data Science</strong> from VIT Bhopal, where I worked on real projects in air quality analysis, medical imaging ML, and IoT safety systems.</p>
+      <p>I use <strong>AI tools</strong> to deliver faster than traditional developers — a website that takes an agency 2 weeks, I can ship in 3–5 days without cutting corners on quality.</p>
+      <p>Based in <strong>Kottayam, Kerala</strong>. Available for remote projects worldwide.</p>
+      <a href="https://upwork.com" class="about-link">View my Upwork profile ↗</a>
+    </div>
+    <div class="about-skills">
+      <div class="skill-row"><span class="skill-name">React / HTML / CSS</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Python</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Data Analysis</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:82%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Scikit-learn / ML</span><div class="skill-bar-wrap"><div class="skill-bar blue" style="width:75%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">AI Tools</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Automation / Scripting</span><div class="skill-bar-wrap"><div class="skill-bar blue" style="width:78%"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section>
+  <div class="s-label">How it works</div>
+  <h2 class="s-title">FROM BRIEF<br>TO DELIVERED.</h2>
+  <p class="s-sub">Simple, transparent process — no surprises, no delays.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-num">01</div>
+      <div class="process-step-title">Brief</div>
+      <div class="process-step-desc">Tell me your project. I reply within 24 hours with a clear plan and timeline.</div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">02</div>
+      <div class="process-step-title">Build</div>
+      <div class="process-step-desc">I get to work. Daily updates so you always know where things stand.</div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">03</div>
+      <div class="process-step-title">Review</div>
+      <div class="process-step-desc">You review and give feedback. I revise until you're satisfied.</div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">04</div>
+      <div class="process-step-title">Deliver</div>
+      <div class="process-step-desc">Final files, deployed if needed. Clean handoff with full documentation.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div id="contact" class="cta-band">
+  <div>
+    <div class="cta-band-title">GOT A PROJECT<br>IN MIND?</div>
+    <p class="cta-band-sub">I reply within 24 hours. Let's figure out if I'm the right fit.</p>
+  </div>
+  <a href="https://upwork.com" class="btn-dark">Message me on Upwork ↗</a>
+</div>
+
+<footer>
+  <div class="footer-logo">Sidharth<span>.</span></div>
+  <p>Kottayam, Kerala · Available worldwide</p>
+  <p>Built by Sidharth E. using AI tools</p>
+</footer>
+
+</body>
+</html>
